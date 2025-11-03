@@ -299,11 +299,23 @@ workflow RIBOSEQ {
     // Get P-sites and P-site diagnostics with riboWaltz
     //
 
+    // Keep only riboseq transcriptome BAMs for riboWaltz
+    ch_transcriptome_bam
+        .branch { meta, bam ->
+            riboseq: meta.sample_type == 'riboseq'
+                return [ meta, bam ]
+            tiseq: meta.sample_type == 'tiseq'
+                return [ meta, bam ]
+            rnaseq: meta.sample_type == 'rnaseq'
+                return [ meta, bam ]
+        }
+        .set { ch_transcriptome_bam_by_type }
+
     if (!params.skip_ribowaltz) {
         RIBOWALTZ(
-            ch_transcriptome_bam,
-            ch_gtf,
-            ch_fasta)
+            ch_transcriptome_bam_by_type.riboseq,
+            ch_gtf.map { [ [:], it ] },
+            ch_fasta.map { [ [:], it ] })
 
     }
 
