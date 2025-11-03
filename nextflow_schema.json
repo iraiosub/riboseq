@@ -425,6 +425,10 @@
                     "type": "string",
                     "description": "Extra arguments to pass to the ribotricer detect-orfs command in addition to defaults defined by the pipeline."
                 },
+                "extra_ribowaltz_args": {
+                    "type": "string",
+                    "description": "Extra arguments to pass to the riboWaltz command in addition to defaults defined by the pipeline."
+                },
                 "extra_anota2seq_run_args": {
                     "type": "string",
                     "description": "Extra arguments to pass to anota2seq in addition to defaults defined by the pipeline."
@@ -556,6 +560,11 @@
                 "skip_ribotricer": {
                     "type": "boolean",
                     "description": "Skip Riboricer.",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_ribowaltz": {
+                    "type": "boolean",
+                    "description": "Skip riboWaltz.",
                     "fa_icon": "fas fa-fast-forward"
                 }
             }
