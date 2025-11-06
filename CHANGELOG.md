@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Old parameter                        | New parameter             |
 | ------------------------------------ | ------------------------- |
-|                                      | `--skip_psite`            |
+|                                      | `--skip_ribowaltz`            |
 |                                      | `--extra_ribowaltz_args`  |
 
 ### `Changed`
