@@ -3,9 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.2
+## v1.2.0
 
 ### `Added`
+
+- [#113](https://github.com/nf-core/riboseq/pull/113) - Add P-site identification with riboWaltz ([@iraiosub](https://github.com/iraiosub), reviewed by [@JackCurragh](https://github.com/JackCurragh))
+
+### `Parameters`
+
+| Old parameter                        | New parameter             |
+| ------------------------------------ | ------------------------- |
+|                                      | `--skip_psite`            |
+|                                      | `--extra_ribowaltz_args`  |
 
 ### `Changed`
 
