@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Dependencies`
 
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `fastp`    | 0.23.4      | 1.0.1       |
+| `MultiQC`  | 1.27        | 1.32        |
+| `umitools` | 1.1.5       | 1.1.6       |
+
 ### `Deprecated`
 
 ## v1.1.0 - 2025-01-30
