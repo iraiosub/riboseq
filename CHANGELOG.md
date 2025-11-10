@@ -3,6 +3,26 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.2
+
+### `Added`
+
+### `Changed`
+
+- [#111](https://github.com/nf-core/riboseq/pull/111) - Template update for nf-core/tools v3.4.1 ([@nf-corebot](https://github.com/nf-corebot), ([@maxulysse](https://github.com/maxulysse), reviewed by @mashehu))
+
+### `Fixed`
+
+### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `fastp`    | 0.23.4      | 1.0.1       |
+| `MultiQC`  | 1.27        | 1.32        |
+| `umitools` | 1.1.5       | 1.1.6       |
+
+### `Deprecated`
+
 ## v1.1.1 - 2025-03-26
 
 ### `Added`
