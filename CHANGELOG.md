@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.2
+
+### `Added`
+
+### `Changed`
+
+- [#111](https://github.com/nf-core/riboseq/pull/111) - Template update for nf-core/tools v3.0.2 ([@nf-corebot](https://github.com/nf-corebot), ([@maxulysse](https://github.com/maxulysse), reviewed by XXX))
+
+### `Fixed`
+
+### `Dependencies`
+
+### `Deprecated`
+
 ## v1.1.1 - 2025-03-26
 
 ### `Added`
