@@ -87,7 +87,7 @@ This describes how to compare groups of samples between treament groups, and bet
 - `reference`: which value of the variable column should be used to select samples to be used as the reference/ base group?
 - `target`: which value of the variable column should be used to select samples to be used as the target/treated group?
 - `batch`: (optional) specify a variable in the sample sheet that defines sample batches
-- `pair`: (optional) specify a variable in the sample shet that defines sample pairing between RNA-seq and Ribo-seq samples. If not specified, it is assumed that the two types of sample are ordered the same.
+- `pair`: (optional) specify a variable in the sample sheet that defines sample pairing between RNA-seq and Ribo-seq samples. If not specified, it is assumed that the two types of sample are ordered the same.
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/usage/getting_started/configuration#custom-configuration-files).
