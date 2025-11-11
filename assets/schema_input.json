@@ -10,22 +10,29 @@
             "sample": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample ID must be provided and must be a string that cannot contain spaces",
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
             "fastq_1": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             },
             "fastq_2": {
+                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'",
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "anyOf": [
+                    {
+                        "pattern": "^\\S+\\.f(ast)?q\\.gz$"
+                    },
+                    {
+                        "maxLength": 0
+                    }
+                ]
             },
             "strandedness": {
                 "type": "string",
@@ -38,21 +45,6 @@
                 "errorMessage": "Sample type must be provided and be one of 'riboseq', 'rnaseq' or 'tiseq'",
                 "enum": ["riboseq", "rnaseq", "tiseq"],
                 "meta": ["sample_type"]
-            },
-            "sample_description": {
-                "type": "string",
-                "errorMessage": "Sample description must be a string",
-                "description": "Optional description of the sample"
-            },
-            "pair": {
-                "type": "string",
-                "errorMessage": "Pair information must be a string",
-                "description": "Sample pairing information for paired analysis"
-            },
-            "treatment": {
-                "type": "string",
-                "errorMessage": "Treatment information must be a string",
-                "description": "Treatment condition or experimental group"
             }
         },
         "required": ["sample", "fastq_1", "strandedness", "type"]
