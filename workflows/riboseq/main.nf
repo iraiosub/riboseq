@@ -33,6 +33,7 @@ include { RIBOTRICER_PREPAREORFS                               } from '../../mod
 include { RIBOTRICER_DETECTORFS                                } from '../../modules/nf-core/ribotricer/detectorfs'
 include { ANOTA2SEQ_ANOTA2SEQRUN                               } from '../../modules/nf-core/anota2seq/anota2seqrun'
 include { QUANTIFY_PSEUDO_ALIGNMENT as QUANTIFY_STAR_SALMON    } from '../../subworkflows/nf-core/quantify_pseudo_alignment'
+include { RIBOWALTZ                                            } from '../../modules/nf-core/ribowaltz/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -291,6 +292,31 @@ workflow RIBOSEQ {
             RIBOTRICER_PREPAREORFS.out.candidate_orfs
         )
         ch_versions = ch_versions.mix(RIBOTRICER_DETECTORFS.out.versions)
+    }
+
+
+    //
+    // Get P-sites and P-site diagnostics with riboWaltz
+    //
+
+    // Keep only riboseq transcriptome BAMs for riboWaltz
+    ch_transcriptome_bam
+        .branch { meta, bam ->
+            riboseq: meta.sample_type == 'riboseq'
+                return [ meta, bam ]
+            tiseq: meta.sample_type == 'tiseq'
+                return [ meta, bam ]
+            rnaseq: meta.sample_type == 'rnaseq'
+                return [ meta, bam ]
+        }
+        .set { ch_transcriptome_bam_by_type }
+
+    if (!params.skip_ribowaltz) {
+        RIBOWALTZ(
+            ch_transcriptome_bam_by_type.riboseq,
+            ch_gtf.map { [ [:], it ] },
+            ch_fasta.map { [ [:], it ] })
+
     }
 
     //

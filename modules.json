@@ -105,6 +105,11 @@
                         "git_sha": "2cc745f8a5649be9fe6fd95c6eca92e7c95ce0bb",
                         "installed_by": ["modules"]
                     },
+                    "ribowaltz": {
+                        "branch": "master",
+                        "git_sha": "1d74f91a865c2843f768fe5819369ecbd255b93e",
+                        "installed_by": ["modules"]
+                    },
                     "rsem/preparereference": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
