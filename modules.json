@@ -52,12 +52,12 @@
                     },
                     "fq/lint": {
                         "branch": "master",
-                        "git_sha": "2c0260ed80daeca9c6dfa477a4daf04ff336dc37",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["fastq_qc_trim_filter_setstrandedness"]
                     },
                     "fq/subsample": {
                         "branch": "master",
-                        "git_sha": "a1abf90966a2a4016d3c3e41e228bfcbd4811ccc",
+                        "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
                         "installed_by": ["fastq_subsample_fq_salmon"]
                     },
                     "gffread": {
@@ -107,7 +107,7 @@
                     },
                     "ribowaltz": {
                         "branch": "master",
-                        "git_sha": "1d74f91a865c2843f768fe5819369ecbd255b93e",
+                        "git_sha": "5111d7a79aa8071bf2758cf64d6f5688879cc2be",
                         "installed_by": ["modules"]
                     },
                     "rsem/preparereference": {
@@ -156,7 +156,7 @@
                     },
                     "sortmerna": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "ddb0d667cf6cdee3bab9497241de4bbf6b88d8cc",
                         "installed_by": ["fastq_qc_trim_filter_setstrandedness"]
                     },
                     "star/align": {
