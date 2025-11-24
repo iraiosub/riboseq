@@ -39,6 +39,12 @@
                 "RIBOTISH_QUALITY_RIBOSEQ": {
                     "ribotish": "0.2.7"
                 },
+                "RIBOWALTZ": {
+                    "bioconductor-genomicfeatures": "1.54.1",
+                    "bioconductor-ribowaltz": 2.0,
+                    "r-base": "4.3.2",
+                    "r-dplyr": "1.1.4"
+                },
                 "SALMON_INDEX": {
                     "salmon": "1.10.3"
                 },
@@ -64,10 +70,10 @@
                     "bioconductor-summarizedexperiment": "1.32.0"
                 },
                 "SORTMERNA": {
-                    "sortmerna": "4.3.6"
+                    "sortmerna": "4.3.7"
                 },
                 "SORTMERNA_INDEX": {
-                    "sortmerna": "4.3.6"
+                    "sortmerna": "4.3.7"
                 },
                 "STAR_ALIGN": {
                     "gawk": "5.1.0",
@@ -1291,6 +1297,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2025-11-13T21:11:39.0894"
+        "timestamp": "2025-11-19T20:47:02.137504918"
     }
 }

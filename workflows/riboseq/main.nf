@@ -318,6 +318,7 @@ workflow RIBOSEQ {
             ch_fasta.map { [ [:], it ] })
 
     }
+    ch_versions = ch_versions.mix(RIBOWALTZ.out.versions)
 
     //
     // SUBWORKFLOW: Count reads from BAM alignments using Salmon

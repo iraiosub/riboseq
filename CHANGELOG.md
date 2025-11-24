@@ -19,18 +19,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#111](https://github.com/nf-core/riboseq/pull/111) - Template update for nf-core/tools v3.4.1 ([@nf-corebot](https://github.com/nf-corebot), [@maxulysse](https://github.com/maxulysse), reviewed by [@mashehu](https://github.com/mashehu))
+- [#115](https://github.com/nf-core/riboseq/pull/115) - Prerelease changes v1.2.0 ([@iraiosub](https://github.com/pinin4fjords), review by [@JackCurragh](https://github.com/JackCurragh))
+- [#117](https://github.com/nf-core/riboseq/pull/117) - Update modules for v1.2.0: `fq/lint`, `fq/subsample` and `sortmerna`([@iraiosub](https://github.com/pinin4fjords), review by [@JackCurragh](https://github.com/JackCurragh))
 
 ### `Fixed`
 
 - [#114](https://github.com/nf-core/riboseq/pull/114) - Fix order of steps in metro map ([#109](https://github.com/nf-core/riboseq/issues/109)): UMI-tools extract is now correctly placed before adaptor trimming ([@iraiosub](https://github.com/iraiosub), reviewed by [@JackCurragh](https://github.com/JackCurragh))
+- [#117](https://github.com/nf-core/riboseq/pull/117) - Update `ribowaltz` module containing a conda dependencies fix and add missing versions to MultiQC ([@iraiosub](https://github.com/pinin4fjords), review by [@JackCurragh](https://github.com/JackCurragh))
 
 ### `Dependencies`
 
-| Dependency | Old version | New version |
-| ---------- | ----------- | ----------- |
-| `fastp`    | 0.23.4      | 1.0.1       |
-| `MultiQC`  | 1.27        | 1.32        |
-| `umitools` | 1.1.5       | 1.1.6       |
+| Dependency  | Old version | New version |
+| ----------- | ----------- | ----------- |
+| `fastp`     | 0.23.4      | 1.0.1       |
+| `MultiQC`   | 1.27        | 1.32        |
+| `umitools`  | 1.1.5       | 1.1.6       |
+| `SortMeRNA` | 4.3.6       | 4.3.7       |
 
 ### `Deprecated`
 
