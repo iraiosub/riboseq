@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `MultiQC`   | 1.27        | 1.32        |
 | `umitools`  | 1.1.5       | 1.1.6       |
 | `SortMeRNA` | 4.3.6       | 4.3.7       |
+| `Nextflow`  | 24.04.2     | 25.04.8     |
 
 ### `Deprecated`
 
