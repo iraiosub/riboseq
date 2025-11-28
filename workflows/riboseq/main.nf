@@ -317,8 +317,8 @@ workflow RIBOSEQ {
             ch_gtf.map { [ [:], it ] },
             ch_fasta.map { [ [:], it ] })
 
+        ch_versions = ch_versions.mix(RIBOWALTZ.out.versions)
     }
-    ch_versions = ch_versions.mix(RIBOWALTZ.out.versions)
 
     //
     // SUBWORKFLOW: Count reads from BAM alignments using Salmon
