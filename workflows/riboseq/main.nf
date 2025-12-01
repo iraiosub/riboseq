@@ -192,7 +192,6 @@ workflow RIBOSEQ {
     ch_genome_bam              = FASTQ_ALIGN_STAR.out.bam
     ch_genome_bam_index        = FASTQ_ALIGN_STAR.out.bai
     ch_transcriptome_bam       = FASTQ_ALIGN_STAR.out.orig_bam_transcript
-    ch_transcriptome_bai       = FASTQ_ALIGN_STAR.out.bai_transcript
     ch_versions                = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
 
     ch_multiqc_files = ch_multiqc_files
