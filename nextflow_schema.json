@@ -775,5 +775,10 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "fastp_merge": {
+            "type": "boolean"
+        }
+    }
 }

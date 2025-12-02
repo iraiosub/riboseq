@@ -99,21 +99,7 @@ workflow RIBOSEQ {
     if (params.remove_ribo_rna) { prepareToolIndices << 'sortmerna' }
     if (!params.skip_alignment) { prepareToolIndices << params.aligner }
 
-    // Determine whether to filter the GTF or not
-    def filterGtf =
-        ((
-            // Condition 1: Alignment is required and aligner is set
-            !params.skip_alignment && params.aligner
-        ) ||
-        (
-            // Condition 2: Transcript FASTA file is not provided
-            !params.transcript_fasta
-        )) &&
-        (
-            // Condition 3: --skip_gtf_filter is not provided
-            !params.skip_gtf_filter
-        )
-
+    // Initialise MultiQC files channel
     ch_multiqc_files = Channel.empty()
 
     //
@@ -167,7 +153,8 @@ workflow RIBOSEQ {
         params.umi_discard_read,
         params.stranded_threshold,
         params.unstranded_threshold,
-        params.skip_linting
+        params.skip_linting,
+        params.fastp_merge
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS.out.multiqc_files)
@@ -192,7 +179,6 @@ workflow RIBOSEQ {
     ch_genome_bam              = FASTQ_ALIGN_STAR.out.bam
     ch_genome_bam_index        = FASTQ_ALIGN_STAR.out.bai
     ch_transcriptome_bam       = FASTQ_ALIGN_STAR.out.orig_bam_transcript
-    ch_transcriptome_bai       = FASTQ_ALIGN_STAR.out.bai_transcript
     ch_versions                = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
 
     ch_multiqc_files = ch_multiqc_files
