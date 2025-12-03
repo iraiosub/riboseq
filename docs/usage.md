@@ -46,19 +46,16 @@ If you set the strandedness value to `auto`, the pipeline will sub-sample the in
 #### Usage Examples
 
 1. **Forward Stranded Sample:**
-
    - Forward fraction: 0.85
    - Reverse fraction: 0.15
    - **Classification:** Forward stranded
 
 2. **Reverse Stranded Sample:**
-
    - Forward fraction: 0.1
    - Reverse fraction: 0.9
    - **Classification:** Reverse stranded
 
 3. **Unstranded Sample:**
-
    - Forward fraction: 0.45
    - Reverse fraction: 0.55
    - **Classification:** Unstranded
@@ -197,6 +194,10 @@ By default, the input GTF file will be filtered to ensure that sequence names co
 ## Riboseq-specific options
 
 The pipeline will by default run the [Ribo-TISH](https://github.com/zhpn1024/ribotish) [quality](https://github.com/zhpn1024/ribotish?tab=readme-ov-file#quality) and [predict](https://github.com/zhpn1024/ribotish?tab=readme-ov-file#predict) commands for QC and ORF prediction, respectively. Additional arguments can be supplied to either command via the `--extra_ribotish_quality_args` and `--extra_ribotish_predict_args` parameters.
+
+## P-site identification
+
+The pipeline will by default run [riboWaltz](https://github.com/LabTranslationalArchitectomics/riboWaltz) for P-site identification and diagnostics, unless disabled with `--skip_ribowaltz`. Additional arguments can be supplied via `--extra_ribowaltz_args` parameters. An example is: `--extra_ribowaltz_args "--length_range 27:31 --periodicity_threshold 40 --extremity 5end --start_nts 45 --stop_nts 24"`. If not provided, defaults used in the [nf-core module](https://github.com/nf-core/modules/blob/master/modules/nf-core/ribowaltz/templates/ribowaltz.r) are used.
 
 ## Translational efficiency
 
@@ -341,7 +342,7 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `shifter`
   - A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
 - `charliecloud`
-  - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
+  - A generic configuration profile to be used with [Charliecloud](https://charliecloud.io/)
 - `apptainer`
   - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
 - `wave`

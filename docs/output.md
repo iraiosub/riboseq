@@ -34,6 +34,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
   - [ORF predictions](#orf-predictions)
     - [Ribo-TISH predict](#ribo-tish-predict)
     - [Ribotricer detect-orfs](#ribotricer-detect-orfs)
+  - [P-site identification](#p-site-identification)
+    - [riboWaltz](#ribowaltz)
   - [Quantification](#quantification)
   - [Translational efficiency](#translational-efficiency)
     - [MultiQC](#multiqc)
@@ -297,7 +299,38 @@ Read distribution metrics around annotated protein coding regions or based on al
 
 - `orf_predictions/ribotricer/`
   - `*_translating_ORFs.tsv` TSV with ORFs assessed as translating in the assocciated BAM file
-  - `*_psite_offsets.txt`: If the P-site offsets are not provided, txt file containing the derived relative offsets.
+  - `*_psite_offsets.txt`: If the P-site offsets are not provided, txt file containing the derived relative offsets
+  </details>
+
+## P-site identification
+
+### riboWaltz
+
+P-sites are identified by passing transcriptome-level alignment BAM files to riboWaltz, producing the following outputs:
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `ribowaltz/`
+  - `*.best_offset.txt`: Text file with the extremity used for the offset correction step and the best offset for each sample
+  - `*.psite_offset.tsv`: TSV file containing P-site offsets for each read length
+  - `*.psite.tsv`: TSV file containing P-site transcriptomic coordinates and information for each alignment
+  - `*.codon_coverage_rpf.tsv`: TSV file with codon-level RPF coverage for each transcript
+  - `*.codon_coverage_psite.tsv`: TSV file with codon-level P-site coverage for each transcript
+  - `*.cds_coverage_psite.tsv`: TSV file with CDS P-site in-frame counts for each transcript
+  - `*nt_coverage_psite.tsv`: TSV file with CDS P-site in-frame counts for each transcript, excluding P-sites within defined distances to start and stop codons (defined by passing `--exclude_start` and `--exclude_stop` with the number of nucleotides)
+- `ribowaltz/offset_plot/<SAMPLE>/`
+  - `*.pdf`: P-site offset plots for each read length
+- `ribowaltz/ribowaltz_qc/`
+  - `*.length_distribution.pdf`: Distribution of read lengths per sample
+  - `*.ends_heatmap.pdf`: Meta-heatmaps of read extremities around start and stop codons for each read length
+  - `*.length_bins_for_psite.pdf`: Distribution of read lengths used to derive P-site offsets per sample
+  - `*.psite_region.pdf`: P-site region distribution per sample
+  - `*.metaprofile_psite.pdf`: P-site metaprofiles around start and stop codons per sample
+  - `*.frames.pdf`: P-site frame distribution per sample
+  - `*.frames_stratified.pdf`: P-site frame distribution for each read length per sample
+  - `*.codon_usage.pdf`: Codon usage index per sample
+
   </details>
 
 ## Quantification
@@ -320,6 +353,7 @@ Quantification is done by passing transcriptome-level alignment BAM files to Sal
   - salmon.merged.transcript_counts.tsv`: Matrix of isoform-level raw counts across all samples.
   - salmon.merged.transcript_tpm.tsv`: Matrix of isoform-level TPM values across all samples.
   - salmon.merged.transcript.rds`: RDS object that can be loaded in R that contains a [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) container with the TPM (`abundance`), estimated isoform-level raw counts (`counts`) and transcript length (`length`) in the assays slot for transcripts.
+
   </details>
 
 Raw outputs from Salmon are available for each sample:
@@ -335,6 +369,7 @@ Raw outputs from Salmon are available for each sample:
   - `logs/`: Contains the file `salmon_quant.log` giving a record of Salmon's quantification.
   - `quant.genes.sf`: Salmon _gene_-level quantification of the sample, including feature length, effective length, TPM, and number of reads.
   - `quant.sf`: Salmon _transcript_-level quantification of the sample, including feature length, effective length, TPM, and number of reads.
+
   </details>
 
 ## Translational efficiency

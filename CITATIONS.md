@@ -40,6 +40,10 @@
 
   > Choudhary S, Li W, D Smith A. Accurate detection of short and long active ORFs using Ribo-seq data. Bioinformatics. 2020 Apr 1;36(7):2053-2059. doi: 10.1093/bioinformatics/btz878. PMID: 31750902; PMCID: PMC7141849.
 
+- [riboWaltz](https://pubmed.ncbi.nlm.nih.gov/30102689/)
+
+  > Lauria F, Tebaldi T, Bernabò P, Groen EJN, Gillingwater TH, Viero G. riboWaltz: Optimization of ribosome P-site positioning in ribosome profiling data. PLoS Comput Biol. 2018 Aug 13;14(8):e1006169. doi: 10.1371/journal.pcbi.1006169. PMID: 30102689; PMCID: PMC6112680.
+
 - [SortMeRNA](https://pubmed.ncbi.nlm.nih.gov/23071270/)
 
   > Kopylova E, Noé L, Touzet H. SortMeRNA: fast and accurate filtering of ribosomal RNAs in metatranscriptomic data Bioinformatics. 2012 Dec 15;28(24):3211-7. doi: 10.1093/bioinformatics/bts611. Epub 2012 Oct 15. PubMed PMID: 23071270.

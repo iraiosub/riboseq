@@ -17,8 +17,7 @@
                     "format": "file-path",
                     "exists": true,
                     "schema": "assets/schema_input.json",
-                    "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
+                    "pattern": "^\\S+\\.(csv|tsv|json|yaml|yml)$",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/riboseq/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
@@ -29,7 +28,6 @@
                     "help_text": "This file is used to define groups of samples from 'input' to compare.  It must contain at least the columns 'variable', 'reference' and 'target', and optionally a 'batch' column. 'variable' and 'batch' must be columns in the input sample sheet, 'reference' and 'target' are values in the column indicated by 'variable'.",
                     "pattern": "^\\S+\\.(csv|tsv|txt)$",
                     "format": "file-path",
-                    "mimetype": "text/csv",
                     "fa_icon": "fas fa-adjust"
                 },
                 "outdir": {
@@ -427,6 +425,10 @@
                     "type": "string",
                     "description": "Extra arguments to pass to the ribotricer detect-orfs command in addition to defaults defined by the pipeline."
                 },
+                "extra_ribowaltz_args": {
+                    "type": "string",
+                    "description": "Extra arguments to pass to the riboWaltz command in addition to defaults defined by the pipeline."
+                },
                 "extra_anota2seq_run_args": {
                     "type": "string",
                     "description": "Extra arguments to pass to anota2seq in addition to defaults defined by the pipeline."
@@ -558,6 +560,11 @@
                 "skip_ribotricer": {
                     "type": "boolean",
                     "description": "Skip Riboricer.",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_ribowaltz": {
+                    "type": "boolean",
+                    "description": "Skip riboWaltz.",
                     "fa_icon": "fas fa-fast-forward"
                 }
             }
@@ -718,6 +725,18 @@
                     "fa_icon": "far calendar",
                     "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
                     "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message."
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message."
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
                 }
             }
         }
@@ -756,5 +775,10 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "fastp_merge": {
+            "type": "boolean"
+        }
+    }
 }

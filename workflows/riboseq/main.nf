@@ -33,6 +33,7 @@ include { RIBOTRICER_PREPAREORFS                               } from '../../mod
 include { RIBOTRICER_DETECTORFS                                } from '../../modules/nf-core/ribotricer/detectorfs'
 include { ANOTA2SEQ_ANOTA2SEQRUN                               } from '../../modules/nf-core/anota2seq/anota2seqrun'
 include { QUANTIFY_PSEUDO_ALIGNMENT as QUANTIFY_STAR_SALMON    } from '../../subworkflows/nf-core/quantify_pseudo_alignment'
+include { RIBOWALTZ                                            } from '../../modules/nf-core/ribowaltz/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,21 +99,7 @@ workflow RIBOSEQ {
     if (params.remove_ribo_rna) { prepareToolIndices << 'sortmerna' }
     if (!params.skip_alignment) { prepareToolIndices << params.aligner }
 
-    // Determine whether to filter the GTF or not
-    def filterGtf =
-        ((
-            // Condition 1: Alignment is required and aligner is set
-            !params.skip_alignment && params.aligner
-        ) ||
-        (
-            // Condition 2: Transcript FASTA file is not provided
-            !params.transcript_fasta
-        )) &&
-        (
-            // Condition 3: --skip_gtf_filter is not provided
-            !params.skip_gtf_filter
-        )
-
+    // Initialise MultiQC files channel
     ch_multiqc_files = Channel.empty()
 
     //
@@ -166,7 +153,8 @@ workflow RIBOSEQ {
         params.umi_discard_read,
         params.stranded_threshold,
         params.unstranded_threshold,
-        params.skip_linting
+        params.skip_linting,
+        params.fastp_merge
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS.out.multiqc_files)
@@ -191,7 +179,6 @@ workflow RIBOSEQ {
     ch_genome_bam              = FASTQ_ALIGN_STAR.out.bam
     ch_genome_bam_index        = FASTQ_ALIGN_STAR.out.bai
     ch_transcriptome_bam       = FASTQ_ALIGN_STAR.out.orig_bam_transcript
-    ch_transcriptome_bai       = FASTQ_ALIGN_STAR.out.bai_transcript
     ch_versions                = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
 
     ch_multiqc_files = ch_multiqc_files
@@ -293,6 +280,32 @@ workflow RIBOSEQ {
         ch_versions = ch_versions.mix(RIBOTRICER_DETECTORFS.out.versions)
     }
 
+
+    //
+    // Get P-sites and P-site diagnostics with riboWaltz
+    //
+
+    // Keep only riboseq transcriptome BAMs for riboWaltz
+    ch_transcriptome_bam
+        .branch { meta, bam ->
+            riboseq: meta.sample_type == 'riboseq'
+                return [ meta, bam ]
+            tiseq: meta.sample_type == 'tiseq'
+                return [ meta, bam ]
+            rnaseq: meta.sample_type == 'rnaseq'
+                return [ meta, bam ]
+        }
+        .set { ch_transcriptome_bam_by_type }
+
+    if (!params.skip_ribowaltz) {
+        RIBOWALTZ(
+            ch_transcriptome_bam_by_type.riboseq,
+            ch_gtf.map { [ [:], it ] },
+            ch_fasta.map { [ [:], it ] })
+
+        ch_versions = ch_versions.mix(RIBOWALTZ.out.versions)
+    }
+
     //
     // SUBWORKFLOW: Count reads from BAM alignments using Salmon
     //
@@ -341,7 +354,7 @@ workflow RIBOSEQ {
     ch_versions = ch_versions.filter{it != null}
 
     softwareVersionsToYAML(ch_versions)
-        .collectFile(storeDir: "${params.outdir}/pipeline_info", name: 'nf_core_pipeline_software_mqc_versions.yml', sort: true, newLine: true)
+        .collectFile(storeDir: "${params.outdir}/pipeline_info", name: 'nf_core_riboseq_software_mqc_versions.yml', sort: true, newLine: true)
         .set { ch_collated_versions }
 
     //
